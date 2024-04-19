@@ -5,11 +5,12 @@ import "./Header.css";
 import "./Cards.css";
 import { restData } from "../utils/data";
 import ShimmerCard from "./ShimmerCard";
+import { Link } from "react-router-dom";
 export default function Cards() {
   const [restaurantList, setRestaurantList] = useState([]);
   const [serchList, setSearchList] = useState([]);
   const [searchText, setSearchText] = useState("");
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -20,11 +21,17 @@ export default function Cards() {
     );
     console.log("promise", data);
     let jsonData = await data.json();
-
+    console.log(jsonData);
     setRestaurantList(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
+    console.log(
+      "resList",
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+
     setSearchList(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
@@ -39,7 +46,8 @@ export default function Cards() {
 
   function handleSubmit() {
     let filteredSearch = restaurantList.filter(
-      (restaurant) => restaurant.info.name.includes(searchText)
+      (restaurant) =>
+        restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
       // restaurant.info.avgRating > 4
     );
 
@@ -74,7 +82,10 @@ export default function Cards() {
       <div className="cards">
         {serchList.length > 0 ? (
           serchList.map((restaurant, index) => (
-            <RestrauntCard key={restaurant.info.id} restaurant={restaurant} />
+            <Link to={"/restaurant/" + restaurant.info.id}>
+              <RestrauntCard key={restaurant.info.id} restaurant={restaurant} />
+              //{" "}
+            </Link>
           ))
         ) : (
           <ShimmerCard />

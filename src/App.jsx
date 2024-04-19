@@ -9,6 +9,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Cards from "./components/Cards";
 import Error from "./components/Error";
+import RestaurantMenu from "./components/RestaurantMenu";
 
 function App() {
   return (
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/restaurant/:resId",
+        element: <RestaurantMenu  />,
       },
     ],
   },
