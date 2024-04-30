@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { swiggyMenuURL } from "../utils/constants";
 import { useParams } from "react-router-dom";
-
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+import ShimmerCard from "./ShimmerCard";
 function RestaurantMenu() {
-  const [menuData, setMenuData] = useState([]);
+  // const [menuData, setMenuData] = useState([]);
   const { resId } = useParams();
+
   console.log(resId);
-  useEffect(() => {
-    fetchMenuData();
-    console.log("menuData", menuData);
-  }, []);
+  // useEffect(() => {
+  //   fetchMenuData();
+  //   console.log("menuData", menuData);
+  // }, []);
 
-  async function fetchMenuData() {
-    let fetchData = await fetch(swiggyMenuURL + `${resId}`);
-    // let fetchData = await fetch(
-    //   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.6300897&lng=83.0683519&restaurantId=581809"
-    // );
-    let jsonData = await fetchData.json();
+  // async function fetchMenuData() {
+  //   let fetchData = await fetch(swiggyMenuURL + `${resId}`);
+  //   let jsonData = await fetchData.json();
 
-    setMenuData(
-      jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
-        ?.card?.card?.itemCards
-    );
-    console.log(jsonData);
-    // console.log(
-    //   "menu Data",
-    //   jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
-    // );
-  }
+  //   setMenuData(
+  //     jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
+  //       ?.card?.card?.itemCards
+  //   );
+  //   console.log(jsonData);
+  // }
+
+  const menuData = useRestaurantMenu(resId);
+
+  if (menuData == null) return <ShimmerCard />;
 
   return (
     <div className="restaurantmenu">

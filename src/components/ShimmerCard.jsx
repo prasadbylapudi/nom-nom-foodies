@@ -1,7 +1,7 @@
 import React from "react";
 import "./Cards.css";
-function shimmerCard() {
+function ShimmerCard() {
   return <div className="shimmerCard"></div>;
 }
 
-export default shimmerCard;
+export default ShimmerCard;

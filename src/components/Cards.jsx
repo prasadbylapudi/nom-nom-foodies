@@ -64,27 +64,36 @@ export default function Cards() {
 
   return (
     <div>
-      <div className="filter">
-        <div className="search">
-          <div>
-            <input
-              className="search-input"
-              placeholder="search food item"
-              value={searchText}
-              onChange={searchHandler}
-            />
-            <button onClick={handleSubmit}>Search</button>
-          </div>
+      <div className="filter flex">
+        <div className="search m-4 p-4">
+          <input
+            className="search-input border-2 border-gray-950"
+            placeholder="search food item"
+            value={searchText}
+            onChange={searchHandler}
+          />
+          <button
+            className="px-4 py-2 bg-green-300 m-2 rounded-sm"
+            onClick={handleSubmit}
+          >
+            Search
+          </button>
         </div>
-        <br />
-        <button onClick={filterRestaurants}>Top Rated Restaurants</button>
+
+        <div className="flex items-center">
+          <button
+            className="px-4 py-2 bg-orange-400 m-2 rounded-sm"
+            onClick={filterRestaurants}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
-      <div className="cards">
+      <div className="cards flex flex-wrap justify-around">
         {serchList.length > 0 ? (
           serchList.map((restaurant, index) => (
             <Link to={"/restaurant/" + restaurant.info.id}>
-              <RestrauntCard key={restaurant.info.id} restaurant={restaurant} />
-              //{" "}
+              <RestrauntCard key={restaurant.info.id} restaurant={restaurant} />{" "}
             </Link>
           ))
         ) : (
