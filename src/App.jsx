@@ -6,12 +6,13 @@ import Header from "./components/Header";
 // import RestrauntCard from "./components/RestrauntCard";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Cards from "./components/Cards";
+// import Cards from "./components/Cards";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 // import Grocery from "./components/Grocery";
 
 const Grocery = lazy(() => import("./components/Grocery"));
+const Cards = lazy(() => import("./components/Cards"));
 
 function App() {
   return (
@@ -40,18 +41,10 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      // {
-      //   path: "/grocery",
-      //   element: (
-      //     <Suspense fallback={<h1>Loading.....</h1>}>
-      //       <Grocery />
-      //     </Suspense>
-      //   ),
-      // },
       {
         path: "/grocery",
         element: (
-          <Suspense fallback={<h1>Loadinggg.....</h1>}>
+          <Suspense fallback={<h1>Loading.....</h1>}>
             <Grocery />
           </Suspense>
         ),

@@ -8,4 +8,11 @@ export default {
     extend: {},
   },
   plugins: [],
+  darkMode: 'selector',
+  
 }
+// /** @type {import('tailwindcss').Config} */
+// module.exports = {
+//   darkMode: 'selector',
+//   // ...
+// }

@@ -19,19 +19,11 @@ export default function Cards() {
     let data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-    console.log("promise", data);
     let jsonData = await data.json();
-    console.log(jsonData);
     setRestaurantList(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
-    console.log(
-      "resList",
-      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-
     setSearchList(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
@@ -39,9 +31,7 @@ export default function Cards() {
   }
 
   function searchHandler(e) {
-    console.log(e);
     setSearchText(e.target.value);
-    console.log("input", searchText);
   }
 
   function handleSubmit() {
@@ -50,21 +40,17 @@ export default function Cards() {
         restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
       // restaurant.info.avgRating > 4
     );
-
-    console.log("filtereddata", filteredSearch);
     setSearchList(filteredSearch);
   }
 
   const filterRestaurants = () => {
     let filteredData = restaurantList.filter((res) => res.info.avgRating > 4);
-
     setRestaurantList(filteredData);
-    console.log(filteredData);
   };
 
   return (
-    <div>
-      <div className="filter flex">
+    <div className="dark:bg-gray-500">
+      <div className="filter flex ">
         <div className="search m-4 p-4">
           <input
             className="search-input border-2 border-gray-950"

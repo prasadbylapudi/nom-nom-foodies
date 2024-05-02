@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useState, useEffect } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -6,8 +6,18 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () => {
   let onlineStatus = useOnlineStatus();
 
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   return (
-    <div className="header-container flex justify-between bg-orange-500 shadow-lg mb-2">
+    <div className="header-container flex justify-between bg-orange-500 shadow-lg mb-2 dark:bg-gray-400 dark:text-white">
       <Link to={"/"}>
         <div>
           <img
@@ -37,6 +47,17 @@ const Header = () => {
           </li>
 
           <li className="px-3">Online Status: {onlineStatus ? "✅" : "❌"} </li>
+
+          <li>
+            <button
+              onClick={() => {
+                setDarkMode(!darkMode);
+              }}
+              className="bg-black text-white mx-2 px-2 py-1"
+            >
+              Dark Mode
+            </button>
+          </li>
         </ul>
       </div>
     </div>

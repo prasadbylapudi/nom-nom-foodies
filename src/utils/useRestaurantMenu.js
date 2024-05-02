@@ -12,7 +12,7 @@ const useRestaurantMenu = (resId) => {
   async function fetchMenuData() {
     let fetchData = await fetch(swiggyMenuURL + `${resId}`);
     let jsonData = await fetchData.json();
-
+    console.log("jsonData...",jsonData);
     setMenuData(
       jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
         ?.card?.card?.itemCards

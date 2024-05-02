@@ -6,8 +6,7 @@ import ShimmerCard from "./ShimmerCard";
 function RestaurantMenu() {
   // const [menuData, setMenuData] = useState([]);
   const { resId } = useParams();
-
-  console.log(resId);
+  
   // useEffect(() => {
   //   fetchMenuData();
   //   console.log("menuData", menuData);
@@ -25,14 +24,13 @@ function RestaurantMenu() {
   // }
 
   const menuData = useRestaurantMenu(resId);
-
+  console.log("data..", menuData);
   if (menuData == null) return <ShimmerCard />;
 
   return (
     <div className="restaurantmenu">
       <div>
         {menuData.map((item, index) => {
-          console.log(item);
           return (
             <div key={index}>
               {}
