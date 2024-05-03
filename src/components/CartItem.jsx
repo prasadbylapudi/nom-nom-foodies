@@ -14,7 +14,7 @@ const CartItem = ({ itemName, price, image, description }) => {
         <div>
           <h3 className="text-lg font-semibold">{itemName}</h3>
           <p className="text-gray-600">{description}</p>
-          <p className="text-gray-800 font-semibold">₹ {price}</p>
+          <p className="text-gray-800 font-semibold">₹ {price / 100}</p>
         </div>
       </div>
     </div>

@@ -28,20 +28,35 @@ function RestaurantMenu() {
         {menuData.map((item, index) => {
           return (
             <div key={item?.card?.info?.name}>
-              {}
-              <ul>
-                <li className="m-4 p-4">
-                  {item?.card?.info?.name}-{item?.card?.info?.price / 100}
-                  <button
-                    onClick={() => {
-                      handleAddItem(item);
-                    }}
-                    className="bg-black text-white hover:bg-sky-700 m-4 p-4"
-                  >
-                    Add+
-                  </button>
-                </li>
-              </ul>
+              <div className="flex items-center justify-center mb-4">
+                <div className="bg-white rounded-lg shadow-lg p-4 flex items-center">
+                  <div className="w-20 h-20 mr-4 overflow-hidden rounded-lg">
+                    <img
+                      src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${item?.card?.info?.imageId}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">
+                      {item?.card?.info?.name}
+                    </h3>
+                    <p className="text-gray-600">
+                      {item?.card?.info?.description}
+                    </p>
+                    <p className="text-gray-800 font-semibold">
+                      ₹ {item?.card?.info?.price / 100}
+                    </p>
+                    <button
+                      onClick={() => {
+                        handleAddItem(item);
+                      }}
+                      className="bg-black text-white hover:bg-sky-700 m-4 p-4"
+                    >
+                      Add+
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           );
         })}

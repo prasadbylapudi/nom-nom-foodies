@@ -21,7 +21,15 @@ import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
 
 function App() {
-  const [userName, setUserName] = useState("prasad");
+  const [userName, setUserName] = useState();
+
+  useEffect(() => {
+    //making
+    const userData = {
+      name: "prasad",
+    };
+    setUserName(userData.name);
+  }, [userName]);
 
   const { loggedInUser } = useContext(UserContext);
   return (

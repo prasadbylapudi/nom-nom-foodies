@@ -18,6 +18,7 @@ const Header = () => {
   console.log("cartItems", cartItems);
 
   const { loggedInUser } = useContext(UserContext);
+  // console.log("data", loggedInUser);
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -28,7 +29,7 @@ const Header = () => {
   }, [darkMode]);
 
   return (
-    <div className="header-container flex justify-between bg-orange-500 shadow-lg mb-2 dark:bg-gray-400 dark:text-white">
+    <div className="flex justify-between bg-orange-400 shadow-lg mb-2 dark:bg-black dark:text-white md:bg-red-700 lg:bg-green-500 2xl:bg-pink-600">
       <Link to={"/"}>
         <div>
           <img
@@ -39,22 +40,22 @@ const Header = () => {
       </Link>
       <div className="flex items-center">
         <ul className="flex p-4 m-4">
-          <li className="px-3">Offers</li>
+          <li className="px-3 font-bold">Offers</li>
           <li className="px-3">Help</li>
 
-          <li className="px-3">
+          <li className="px-3 font-bold">
             <Link to={"/about"}>about</Link>
           </li>
 
-          <li className="px-3">
+          <li className="px-3 font-bold">
             <Link to={"/contact"}>Contact</Link>
           </li>
 
-          <li className="px-3 text-lg font-bold">
+          <li className="px-3 text-lg font-bold text-lg	">
             <Link to={"/cart"}>Cart ({cartItems.length + " items"})</Link>
           </li>
-          
-          <li className="px-3">
+
+          <li className="px-3 font-bold">
             <Link to={"/grocery"}>Grocery</Link>
           </li>
 

@@ -7,7 +7,10 @@ const cartSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
-      //mutating the state.
+      //mutating the state.(vanilla(older) redux)
+      //newState=[...state]
+      //return newState;
+      //immer library taking care of this.
       state.items.push(action.payload);
     },
     removeItem: (state, action) => {

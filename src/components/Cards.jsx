@@ -12,8 +12,7 @@ export default function Cards() {
   const [serchList, setSearchList] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  const data1 = useContext(UserContext);
-  console.log(data1, "name");
+  const { loggedInUser } = useContext(UserContext);
   useEffect(() => {
     fetchData();
   }, []);
@@ -53,8 +52,8 @@ export default function Cards() {
 
   return (
     <div className="dark:bg-gray-500">
-      <div className="filter flex ">
-        <div className="search m-4 p-4">
+      <div className=" flex ">
+        <div className=" m-4 p-4">
           <input
             className="search-input border-2 border-gray-950"
             placeholder="search food item"
@@ -77,6 +76,18 @@ export default function Cards() {
             Top Rated Restaurants
           </button>
         </div>
+        <div className="flex items-center">
+          <input
+            className="border-black "
+            value={loggedInUser}
+            onChange={(e) => {
+              // e.preventDefault();
+              console.log("event", e);
+              setUserName(e.target.value);
+            }}
+            placeholder="update username"
+          />
+        </div>
       </div>
       <div className="cards flex flex-wrap justify-around">
         {serchList.length > 0 ? (
@@ -86,6 +97,7 @@ export default function Cards() {
                 key={restaurant.info.name}
                 restaurant={restaurant}
               />
+              {/* {loggedInUser} */}
             </Link>
           ))
         ) : (
@@ -95,3 +107,8 @@ export default function Cards() {
     </div>
   );
 }
+
+/* 
+
+
+*/
