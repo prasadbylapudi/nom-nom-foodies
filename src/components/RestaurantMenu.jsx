@@ -3,25 +3,20 @@ import { swiggyMenuURL } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import ShimmerCard from "./ShimmerCard";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function RestaurantMenu() {
-  // const [menuData, setMenuData] = useState([]);
   const { resId } = useParams();
-  
-  // useEffect(() => {
-  //   fetchMenuData();
-  //   console.log("menuData", menuData);
-  // }, []);
 
-  // async function fetchMenuData() {
-  //   let fetchData = await fetch(swiggyMenuURL + `${resId}`);
-  //   let jsonData = await fetchData.json();
+  const dispatch = useDispatch();
+  function handleAddItem(item) {
+    console.log("added item is:", item?.card?.info);
+    dispatch(addItem(item?.card?.info));
 
-  //   setMenuData(
-  //     jsonData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
-  //       ?.card?.card?.itemCards
-  //   );
-  //   console.log(jsonData);
-  // }
+    toast("item added to the cart");
+  }
 
   const menuData = useRestaurantMenu(resId);
   console.log("data..", menuData);
@@ -32,10 +27,20 @@ function RestaurantMenu() {
       <div>
         {menuData.map((item, index) => {
           return (
-            <div key={index}>
+            <div key={item?.card?.info?.name}>
               {}
               <ul>
-                <li>{item?.card?.info?.name}</li>
+                <li className="m-4 p-4">
+                  {item?.card?.info?.name}-{item?.card?.info?.price / 100}
+                  <button
+                    onClick={() => {
+                      handleAddItem(item);
+                    }}
+                    className="bg-black text-white hover:bg-sky-700 m-4 p-4"
+                  >
+                    Add+
+                  </button>
+                </li>
               </ul>
             </div>
           );

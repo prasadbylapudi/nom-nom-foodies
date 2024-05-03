@@ -1,19 +1,30 @@
-import React, { lazy, useState, useEffect } from "react";
+import React, { lazy, useState, useEffect, useContext } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/userContext";
+
+import { useSelector } from "react-redux";
 
 const Header = () => {
   let onlineStatus = useOnlineStatus();
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
 
+  //* subscribing to the store using selector.
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log("cartItems", cartItems);
+
+  const { loggedInUser } = useContext(UserContext);
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
 
   return (
@@ -30,7 +41,6 @@ const Header = () => {
         <ul className="flex p-4 m-4">
           <li className="px-3">Offers</li>
           <li className="px-3">Help</li>
-          <li className="px-3">Signin</li>
 
           <li className="px-3">
             <Link to={"/about"}>about</Link>
@@ -40,22 +50,27 @@ const Header = () => {
             <Link to={"/contact"}>Contact</Link>
           </li>
 
-          <li className="px-3">Cart</li>
-
+          <li className="px-3 text-lg font-bold">
+            <Link to={"/cart"}>Cart ({cartItems.length + " items"})</Link>
+          </li>
+          
           <li className="px-3">
             <Link to={"/grocery"}>Grocery</Link>
           </li>
 
           <li className="px-3">Online Status: {onlineStatus ? "✅" : "❌"} </li>
+          <li className="px-3">{loggedInUser}</li>
 
           <li>
             <button
               onClick={() => {
                 setDarkMode(!darkMode);
               }}
-              className="bg-black text-white mx-2 px-2 py-1"
+              className={`toggle-button ${
+                darkMode ? "toggle-button-dark" : "toggle-button-light"
+              }`}
             >
-              Dark Mode
+              <div className="toggle-ball"></div>
             </button>
           </li>
         </ul>

@@ -1,16 +1,19 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RestrauntCard from "./RestrauntCard";
 import "./Header.css";
 import "./Cards.css";
 import { restData } from "../utils/data";
 import ShimmerCard from "./ShimmerCard";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/userContext";
 export default function Cards() {
   const [restaurantList, setRestaurantList] = useState([]);
   const [serchList, setSearchList] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  const data1 = useContext(UserContext);
+  console.log(data1, "name");
   useEffect(() => {
     fetchData();
   }, []);
@@ -79,7 +82,10 @@ export default function Cards() {
         {serchList.length > 0 ? (
           serchList.map((restaurant, index) => (
             <Link to={"/restaurant/" + restaurant.info.id}>
-              <RestrauntCard key={restaurant.info.id} restaurant={restaurant} />{" "}
+              <RestrauntCard
+                key={restaurant.info.name}
+                restaurant={restaurant}
+              />
             </Link>
           ))
         ) : (

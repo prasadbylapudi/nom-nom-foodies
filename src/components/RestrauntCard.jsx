@@ -1,7 +1,6 @@
 import React from "react";
 import "./Header.css";
 function RestrauntCard(props) {
-  console.log("prosp", props);
   return (
     <div className=" m-4 p-4 w-[300px] bg-gray-100 hover:bg-gray-200 dark:bg-black dark:text-white dark:hover:bg-gray-800">
       <img
